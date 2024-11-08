@@ -1,189 +1,160 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Festival de Halloween</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Google Fonts e Font Awesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <title>Loja Game - Carregando</title>
     <style>
+        /* Estilos gerais */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #0b0c10;
-            color: #ffffff;
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #fff;
+            overflow: hidden;
+            background-image: linear-gradient(45deg, #2b2b2b 25%, #333 25%, #333 50%, #2b2b2b 50%, #2b2b2b 75%, #333 75%, #333);
+            background-size: 10px 10px;
         }
-        h1, h2 {
-            font-family: 'Creepster', cursive;
-            color: #f5820d;
-        }
-        .background {
+
+        /* Container de loading */
+        #loading-container {
             position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, #0b0c10 0%, #1f2833 100%);
-            overflow: hidden;
-            z-index: -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #222;
+            z-index: 10;
         }
-        .moon {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, #f7e7a0, #c99b3b);
-            border-radius: 50%;
-            top: 50px;
-            left: 50px;
+
+        #loading-container h1 {
+            color: #ff69b4;
+            font-size: 1.5em;
+            margin-bottom: 20px;
         }
-        .bat {
-            position: absolute;
-            width: 50px;
+
+        /* Barra de carregamento */
+        .loading-bar {
+            width: 300px;
             height: 30px;
-            background: url('bat.png') no-repeat center;
-            background-size: cover;
-            animation: fly 8s linear infinite;
-            opacity: 0.8;
-        }
-        .bat1 { top: 20%; left: 10%; animation-delay: 0s; }
-        .bat2 { top: 40%; left: 80%; animation-delay: 2s; }
-        .bat3 { top: 60%; left: 20%; animation-delay: 4s; }
-
-        @keyframes fly {
-            0%, 100% { transform: translateY(0) translateX(0); }
-            50% { transform: translateY(-20px) translateX(10px); }
+            background-color: #555;
+            border: 4px solid #32cd32;
+            overflow: hidden;
+            margin-bottom: 20px;
         }
 
-        .section {
-            background-color: #1f2833;
+        .loading-fill {
+            width: 0;
+            height: 100%;
+            background-color: #ff69b4;
+            transition: width 3s ease;
+        }
+
+        /* Botão de iniciar */
+        #start-button {
+            display: none;
+            background-color: #32cd32;
+            color: #ffffff;
+            padding: 15px 30px;
+            border: 4px solid #ff69b4;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* Conteúdo da loja */
+        #main-content {
+            display: none;
             padding: 20px;
-            border-radius: 10px;
             text-align: center;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .section img {
-            width: 100px;
-            height: auto;
-            margin-bottom: 10px;
+
+        .product-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
-        .section:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.4);
-        }
-        footer {
+
+        .product-card {
+            width: 200px;
             background-color: #333;
-            color: #fff;
-            padding: 20px 0;
+            border: 4px solid #32cd32;
             text-align: center;
+            padding: 10px;
+            box-shadow: 0 0 10px #000;
         }
+
+        .product-card h3 {
+            color: #ff69b4;
+        }
+
+        /* Fonte estilo game */
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
     </style>
 </head>
 <body>
 
-<!-- Animação de fundo -->
-<div class="background">
-    <div class="moon"></div>
-    <div class="bat bat1"></div>
-    <div class="bat bat2"></div>
-    <div class="bat bat3"></div>
-</div>
-
-<!-- Menu de Navegação -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Halloween Fest 🎃</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
-            <li class="nav-item"><a class="nav-link" href="#explorar">Explorar</a></li>
-            <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
-        </ul>
-    </div>
-</nav>
-
-<!-- Conteúdo Principal -->
-<div class="container text-center my-5">
-    <header>
-        <h1>Bem-vindo ao Festival Halloween</h1>
-        <p>Prepare-se para uma experiência assustadora e divertida.</p>
-        <a href="#explorar" class="btn btn-warning btn-lg">Explorar Agora</a>
-    </header>
-</div>
-
-<!-- Seção Sobre -->
-<section id="sobre" class="container my-5">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpB5TC24pFo4AKyINFp-AsYHyYdgYTwrCfsAe37ArGUc1RcWEtW8yVkBCs&s=10" alt="Imagem do Festival de Halloween" class="img-fluid">
+    <!-- Tela de Loading -->
+    <div id="loading-container">
+        <h1>Carregando...</h1>
+        <div class="loading-bar">
+            <div class="loading-fill" id="loading-fill"></div>
         </div>
-        <div class="col-md-6 d-flex align-items-center">
-            <div>
-                <h2>Sobre o Evento</h2>
-                <p>O Festival Halloween é um evento para todas as idades, com atrações como decoração assustadora, doces, fantasias e muito mais. Venha aproveitar o espírito do Halloween conosco!</p>
-                <a href="#explorar" class="btn btn-outline-light">Saiba Mais</a>
+        <button id="start-button" onclick="showMainContent()">Iniciar</button>
+    </div>
+
+    <!-- Conteúdo Principal da Loja -->
+    <div id="main-content">
+        <h1>Bem-vindo à Loja Game!</h1>
+        <p>Confira nossos produtos exclusivos:</p>
+
+        <div class="product-container">
+            <!-- Produto 1 -->
+            <div class="product-card">
+                <h3>Produto 1</h3>
+                <p>Descrição do produto 1</p>
+            </div>
+            <!-- Produto 2 -->
+            <div class="product-card">
+                <h3>Produto 2</h3>
+                <p>Descrição do produto 2</p>
+            </div>
+            <!-- Produto 3 -->
+            <div class="product-card">
+                <h3>Produto 3</h3>
+                <p>Descrição do produto 3</p>
             </div>
         </div>
     </div>
-</section>
 
-<!-- Seções de Destaque -->
-<section id="explorar" class="container text-center my-5">
-    <h2>Explorar</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="section">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9nlJjak4oJAulaCR-foDTdYgjLRn47CLPjg&usqp=CAU" alt="Abóbora de Halloween">
-                <h3>Decorações Assustadoras</h3>
-                <p>Transforme sua casa com nossa linha de decorações aterrorizantes!</p>
-                <a href="https://exemplo.com/decoracoes" class="btn btn-outline-warning btn-sm" target="_blank">Saiba Mais</a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="section">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZQKsZtwQHFCaHhJk26hy0c4owB5zZb67o2oJ-xgvenExV4AdvkD2k3aU&s=10" alt="Fantasia de Halloween">
-                <h3>Fantasias Temáticas</h3>
-                <p>Escolha entre fantasias exclusivas para adultos e crianças.</p>
-                <a href="https://exemplo.com/fantasias" class="btn btn-outline-warning btn-sm" target="_blank">Saiba Mais</a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="section">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKaTKW4p8fWpuXk2Iz8fXaACSOgL-zSB9eMXB24J7ARCszf0G9k-rH5dQ&s=10" alt="Doces de Halloween">
-                <h3>Doces ou Travessuras</h3>
-                <p>Doces e guloseimas que vão adoçar e assustar seu Halloween!</p>
-                <a href="https://exemplo.com/doces" class="btn btn-outline-warning btn-sm" target="_blank">Saiba Mais</a>
-            </div>
-        </div>
-    </div>
-</section>
+    <script>
+        // Função para iniciar a animação de carregamento
+        function startLoading() {
+            // Anima a barra de preenchimento
+            document.getElementById('loading-fill').style.width = '100%';
 
-<!-- Seção Contato -->
-<section id="contato" class="container my-5 text-center">
-    <h2>Contato</h2>
-    <p>Quer saber mais? Entre em contato com a nossa equipe!</p>
-    <a href="mailto:contato@festivalhalloween.com" class="btn btn-outline-light"><i class="fas fa-envelope"></i> Enviar e-mail</a>
-</section>
+            // Mostra o botão de iniciar após 3 segundos
+            setTimeout(() => {
+                document.getElementById('start-button').style.display = 'inline-block';
+            }, 3000);
+        }
 
-<!-- Rodapé -->
-<footer>
-    <p>&copy; 2024 Festival de Halloween. Todos os direitos reservados.</p>
-    <div>
-        <a href="https://facebook.com" target="_blank" class="text-white mx-2"><i class="fab fa-facebook"></i></a>
-        <a href="https://instagram.com" target="_blank" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
-        <a href="https://twitter.com" target="_blank" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
-    </div>
-</footer>
+        // Função para exibir o conteúdo principal e esconder o loading
+        function showMainContent() {
+            document.getElementById('loading-container').style.display = 'none'; // Oculta o loading
+            document.getElementById('main-content').style.display = 'block'; // Mostra o conteúdo principal
+        }
 
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        // Inicia a animação de carregamento quando a página é carregada
+        window.onload = startLoading;
+    </script>
 
 </body>
 </html>
